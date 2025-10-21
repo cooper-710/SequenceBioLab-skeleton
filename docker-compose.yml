@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sbl
+      POSTGRES_PASSWORD: sbl
+      POSTGRES_DB: sbl
+    ports:
+      - "5432:5432"
+    volumes:
+      - sbl_pgdata:/var/lib/postgresql/data
+volumes:
+  sbl_pgdata:

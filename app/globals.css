@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Brand palette */
+  --color-accent: #E5812B; /* Sequence Orange */
+  --color-silver: #C0C6CF; /* Modern silver */
+
+  /* Light theme neutrals */
+  --color-bg: #FFFFFF;
+  --color-surface: #F6F7F9;
+  --color-surface-2: #EEF1F5;
+  --color-border: #E3E8EF;
+  --color-text: #0B0D10;
+  --color-muted: #4B5565;
+
+  --ring: 0 0 0 3px rgba(229,129,43,0.28); /* Orange focus */
+}
+
+:root.dark {
+  color-scheme: dark;
+  /* Dark theme neutrals */
+  --color-bg: #0B0D10; /* Black */
+  --color-surface: #0F1216;
+  --color-surface-2: #13161B;
+  --color-border: #242B36;
+  --color-text: #ECEFF4;
+  --color-muted: #9AA4B2;
+
+  --ring: 0 0 0 3px rgba(229,129,43,0.22);
+}
+
+html, body, :root { height: 100%; }
+body { @apply bg-bg text-text antialiased; }
+
+/* Frosted panel (subtle) */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border);
+}
+
+/* Focus ring utility */
+.focus-ring { box-shadow: var(--ring); }
+
+/* Card */
+.card { @apply bg-surface border border-border rounded-lg shadow; }
+
+/* Eyebrow label */
+.eyebrow { @apply uppercase text-[11px] tracking-[0.14em] text-muted; }
+
+/* Headline */
+.headline { @apply font-semibold tracking-tight; }
+
+/* Mock banner */
+.mock-banner { @apply text-[12px] text-muted; }
+
+/* =========================
+   Print styles (one-pager)
+   ========================= */
+
+/* Page setup */
+@page {
+  /* Use Letter; change to A4 if preferred */
+  size: Letter;
+  margin: 12mm;
+}
+
+@media print {
+  /* Render colors as faithfully as possible */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Force light background/text for printers */
+  html, body { background: #fff !important; color: #000 !important; }
+
+  /* Hide everything by default */
+  body * { visibility: hidden; }
+
+  /* Only show the report content */
+  .print-area,
+  .print-area * { visibility: visible; }
+  .print-area {
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    margin: 0 auto;
+    width: 100%;
+    /* If you want a tighter single page width, uncomment:
+       max-width: 800px;
+    */
+  }
+
+  /* Never print app chrome / controls */
+  .no-print,
+  nav, aside, header, footer,
+  button, [role="button"] { display: none !important; }
+
+  /* Remove “link URLs” that Chrome sometimes appends */
+  a[href]::after { content: "" !important; }
+
+  /* Reduce chance of awkward page breaks */
+  .rounded-2xl,
+  .rounded-xl,
+  .rounded-lg,
+  .card,
+  table, tr, td, th,
+  .section,
+  .stat {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Slightly tighter paddings for print */
+  .p-6 { padding: 16px !important; }
+  .p-4 { padding: 12px !important; }
+
+  /* Softer borders on paper */
+  .border-border\/40 { border-color: rgba(0,0,0,0.18) !important; }
+  .border-border\/20 { border-color: rgba(0,0,0,0.12) !important; }
+}
