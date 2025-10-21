@@ -14,3 +14,17 @@ pnpm-debug.log*
 .DS_Store
 
 /generated/prisma
+.DS_Store
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.cache/
+.env
+.env.*
+*.env
+*.local
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
