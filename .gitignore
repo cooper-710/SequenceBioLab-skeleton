@@ -28,3 +28,7 @@ coverage/
 npm-debug.log*
 pnpm-debug.log*
 yarn-error.log*
+data/
+.venv/
+__pycache__/
+*.pyc
